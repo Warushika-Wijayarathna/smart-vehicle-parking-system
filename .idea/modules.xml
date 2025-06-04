@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Smart-Parking_Management.iml" filepath="$PROJECT_DIR$/Smart-Parking_Management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/payment-service/payment-service.iml" filepath="$PROJECT_DIR$/payment-service/payment-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smart-parking-management-system.iml" filepath="$PROJECT_DIR$/smart-parking-management-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vehicle-service/vehicle-service.iml" filepath="$PROJECT_DIR$/vehicle-service/vehicle-service.iml" />
     </modules>
   </component>
 </project>
