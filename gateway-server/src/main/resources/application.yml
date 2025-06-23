@@ -29,6 +29,11 @@ spring:
         locator:
           enabled: true
 
+      server:
+        webflux:
+           default-filters:
+            - AddRequestHeader=Authorization, "#{request.headers['Authorization']}"
+
 eureka:
   client:
     service-url:
