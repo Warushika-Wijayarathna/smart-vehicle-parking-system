@@ -8,6 +8,7 @@ This project is a microservices-based application built with **Java**, **Spring 
 - RESTful APIs
 - Frontend written in TypeScript
 - Python utilities for data processing
+- JWT-based security for backend APIs
 
 ## Resources
 
@@ -33,6 +34,7 @@ This project is a microservices-based application built with **Java**, **Spring 
    pip install -r requirements.txt
    python main.py
 
-Documentation
-API documentation is available in the Postman collection.
-See /docs for architecture diagrams and additional screenshots.
+** Documentation **
+- API documentation is available in the Postman collection.
+- See /docs for architecture diagrams and additional screenshots.
+- The backend uses JWT authentication for securing RESTful endpoints. To access protected endpoints, include a valid JWT token in the `Authorization` header as `Bearer <token>`. See the Postman collection for example requests.
