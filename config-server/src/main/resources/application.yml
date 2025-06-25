@@ -12,6 +12,7 @@ spring:
           clone-on-start: true
           default-label: master
 
+
 eureka:
   client:
     service-url:
