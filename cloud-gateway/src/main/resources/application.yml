@@ -20,7 +20,7 @@ spring:
         - id: vehicle-service
           uri: http://localhost:5000/vehicle-service
           predicates:
-            - Path=/vehicle-service/**
+            - Path=/vehicles/**
 
         - id: parking-space-service
           uri: lb://PARKING-SPACE-SERVICE
