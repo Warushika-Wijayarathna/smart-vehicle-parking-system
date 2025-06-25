@@ -16,13 +16,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
     private final JwtUtil jwtUtil;
-
 
     // Retrieve the user by given id
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> getUserById(@RequestHeader("Authorization") String token,
+                                               @PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
         if (user == null) {
             return ResponseEntity.notFound().build();
@@ -32,14 +31,16 @@ public class UserController {
 
     // Update the user by given id
     @PutMapping("/update/{id}")
-    private ResponseEntity<UserDTO> updateUser(UserDTO userDTO, @PathVariable Long id) {
-        return null;
+    public ResponseEntity<UserDTO> updateUser(@RequestHeader("Authorization") String token,
+                                              @RequestBody UserDTO userDTO,
+                                              @PathVariable Long id) {
+        // Implement update logic here if needed
+        return ResponseEntity.status(501).build(); // Not implemented
     }
 
-
-    // Get all the user
+    // Get all the users
     @GetMapping("/getAll")
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
+    public ResponseEntity<List<UserDTO>> getAllUsers(@RequestHeader("Authorization") String token) {
         List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
@@ -47,14 +48,16 @@ public class UserController {
     // Delete the user by given id
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUser(@RequestHeader("Authorization") String token,
+                                           @PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
     // Activate the user by given id
     @PutMapping("/activate/{id}")
-    public ResponseEntity<UserDTO> activateUser(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> activateUser(@RequestHeader("Authorization") String token,
+                                                @PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
         if (user == null) {
             return ResponseEntity.notFound().build();
@@ -66,7 +69,8 @@ public class UserController {
 
     // Deactivate the user by given id
     @PutMapping("/deactivate/{id}")
-    public ResponseEntity<UserDTO> deactivateUser(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> deactivateUser(@RequestHeader("Authorization") String token,
+                                                  @PathVariable Long id) {
         UserDTO user = userService.getUserById(id);
         if (user == null) {
             return ResponseEntity.notFound().build();
@@ -76,6 +80,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
+    // Get current user from token
     @GetMapping("/getByToken")
     public ResponseEntity<UserDTO> getUserByToken(@RequestHeader("Authorization") String token) {
         String jwt = token.startsWith("Bearer ") ? token.substring(7) : token;
