@@ -23,9 +23,9 @@ spring:
             - Path=/vehicles/**
 
         - id: parking-space-service
-          uri: lb://PARKING-SPACE-SERVICE
+          uri: http://localhost:8082/
           predicates:
-            - Path=/api/parking/**
+            - Path=/parking-space-service /api/parking/**
 
         - id: payment-service
           uri: http://localhost:5003

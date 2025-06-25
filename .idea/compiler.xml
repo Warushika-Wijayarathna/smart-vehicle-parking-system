@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="eureka-server" />
-        <module name="parking-space-service" />
         <module name="cloud-gateway" />
       </profile>
       <profile name="Annotation profile for user-service" enabled="true">
@@ -21,9 +20,19 @@
         </processorPath>
         <module name="user-service" />
       </profile>
+      <profile name="Annotation profile for parking-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="parking-service" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="gateway-server" target="17" />
+      <module name="parking-space-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -32,6 +41,7 @@
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="gateway-server" options="-parameters" />
+      <module name="parking-service" options="-parameters" />
       <module name="parking-space-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>

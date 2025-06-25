@@ -55,7 +55,7 @@ def get_vehicles_by_user(auth_header):
     except requests.exceptions.RequestException as e:
         return error_response(f"Error verifying user ID: {str(e)}", 500)
 
-def update_vehicle(_id, data):
+def update_vehicle(_id, data, auth_header):
     errors = vehicle_schema.validate(data)
     if errors:
         return error_response(errors, 400)
@@ -74,7 +74,6 @@ def update_vehicle(_id, data):
     updated_vehicle = vehicles_col.find_one({"_id": ObjectId(_id)})
     updated_vehicle["_id"] = str(updated_vehicle["_id"])
     return success_response(updated_vehicle)
-
 
 def delete_vehicle(_id):
     result = vehicles_col.delete_one({"_id": ObjectId(_id)})
