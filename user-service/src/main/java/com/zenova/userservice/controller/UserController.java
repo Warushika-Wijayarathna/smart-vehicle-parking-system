@@ -35,7 +35,13 @@ public class UserController {
                                               @RequestBody UserDTO userDTO,
                                               @PathVariable Long id) {
         // Implement update logic here if needed
-        return ResponseEntity.status(501).build(); // Not implemented
+        UserDTO existingUser = userService.getUserById(id);
+        if (existingUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        userDTO.setId(id);
+        UserDTO updatedUser = userService.createUser(userDTO);
+        return ResponseEntity.ok(updatedUser);
     }
 
     // Get all the users

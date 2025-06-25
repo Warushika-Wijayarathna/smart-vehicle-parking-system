@@ -75,7 +75,8 @@ def update_vehicle(_id, data, auth_header):
     updated_vehicle["_id"] = str(updated_vehicle["_id"])
     return success_response(updated_vehicle)
 
-def delete_vehicle(_id):
+# vehicle_service.py
+def delete_vehicle(_id, auth_header):
     result = vehicles_col.delete_one({"_id": ObjectId(_id)})
     if result.deleted_count == 0:
         return error_response("Vehicle not found", 404)
