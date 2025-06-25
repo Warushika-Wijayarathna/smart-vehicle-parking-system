@@ -1,0 +1,54 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: CLOUD-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: user-auth
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user-service/api/auth/**
+
+        - id: user-users
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user-service/api/users/**
+
+        - id: vehicle-service
+          uri: http://localhost:4000
+          predicates:
+            - Path=/api/vehicles/**
+
+        - id: parking-space-service
+          uri: lb://PARKING-SPACE-SERVICE
+          predicates:
+            - Path=/api/parking/**
+
+        - id: payment-service
+          uri: http://localhost:5000
+          predicates:
+            - Path=/api/payments/**
+jwt:
+  secret: 2D4A614E645267556B58703273357638792F423F4428472B4B6250655368566DF423F4428472B4B6250655368566D
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway, health, info
+  endpoint:
+    gateway:
+      enabled: true
+

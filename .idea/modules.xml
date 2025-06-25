@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/payment-service/payment-service.iml" filepath="$PROJECT_DIR$/payment-service/payment-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/smart-parking-management-system.iml" filepath="$PROJECT_DIR$/smart-parking-management-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/vehicle-service/vehicle-service.iml" filepath="$PROJECT_DIR$/vehicle-service/vehicle-service.iml" />
     </modules>
   </component>
