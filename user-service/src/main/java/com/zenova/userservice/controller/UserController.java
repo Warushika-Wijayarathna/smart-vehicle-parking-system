@@ -2,6 +2,7 @@ package com.zenova.userservice.controller;
 
 import com.zenova.userservice.dto.UserDTO;
 import com.zenova.userservice.service.UserService;
+import com.zenova.userservice.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +16,8 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+    private final JwtUtil jwtUtil;
 
 
     // Retrieve the user by given id
@@ -71,5 +74,23 @@ public class UserController {
         user.setActive(false);
         UserDTO updatedUser = userService.createUser(user);
         return ResponseEntity.ok(updatedUser);
+    }
+
+    @GetMapping("/getByToken")
+    public ResponseEntity<UserDTO> getUserByToken(@RequestHeader("Authorization") String token) {
+        String jwt = token.startsWith("Bearer ") ? token.substring(7) : token;
+
+        // Extract email from JWT
+        String email = jwtUtil.extractEmail(jwt);
+
+        if (email == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        UserDTO user = userService.getUserByEmail(email);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
     }
 }
